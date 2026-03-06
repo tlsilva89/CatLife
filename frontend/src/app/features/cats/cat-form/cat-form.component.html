@@ -1,0 +1,54 @@
+<div class="flex flex-col gap-6 max-w-2xl mx-auto w-full">
+  <div class="flex items-center gap-4">
+    <a routerLink="/cats"
+      class="w-10 h-10 rounded-full bg-white border border-cat-border flex items-center justify-center text-cat-text hover:bg-cat-bg transition-colors cursor-pointer no-underline">
+      <i class="i-ph-arrow-left text-xl"></i>
+    </a>
+    <h2 class="font-heading font-bold text-2xl text-cat-text m-0">
+      {{ isEditMode() ? 'Editar Gatinho' : 'Novo Gatinho' }}
+    </h2>
+  </div>
+
+  <div class="card p-6 md:p-8">
+    <form [formGroup]="catForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+      <div class="flex flex-col gap-1">
+        <label for="name" class="text-sm font-bold text-cat-text">Nome *</label>
+        <input id="name" type="text" formControlName="name" class="input-field" placeholder="Ex: Garfield">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col gap-1">
+          <label for="breed" class="text-sm font-bold text-cat-text">Raça</label>
+          <input id="breed" type="text" formControlName="breed" class="input-field" placeholder="Ex: Persa, SRD">
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="color" class="text-sm font-bold text-cat-text">Cor</label>
+          <input id="color" type="text" formControlName="color" class="input-field" placeholder="Ex: Laranja">
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="birthDate" class="text-sm font-bold text-cat-text">Data de Nascimento *</label>
+        <input id="birthDate" type="date" formControlName="birthDate" class="input-field">
+      </div>
+
+      <div class="flex items-center gap-3 mt-2 p-4 rounded-xl border border-cat-border bg-cat-bg/50">
+        <input id="isCastrated" type="checkbox" formControlName="isCastrated"
+          class="w-5 h-5 accent-cat-primary cursor-pointer">
+        <label for="isCastrated" class="text-sm font-bold text-cat-text cursor-pointer select-none m-0">
+          O gato é castrado?
+        </label>
+      </div>
+
+      <div class="flex justify-end mt-4">
+        <button type="submit" [disabled]="catForm.invalid"
+          class="btn-primary px-8 disabled:opacity-50 disabled:cursor-not-allowed">
+          {{ isEditMode() ? 'Atualizar Perfil' : 'Salvar Gatinho' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

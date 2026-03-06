@@ -1,0 +1,71 @@
+<div class="flex flex-col gap-6">
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <h2 class="font-heading font-bold text-2xl text-cat-text m-0">Agenda</h2>
+
+    <div class="flex items-center gap-3">
+      <select class="input-field max-w-xs" [ngModel]="selectedCatId()" (change)='onCatChange($event)'>
+        @for (cat of cats(); track cat.id) {
+        <option [value]="cat.id">{{ cat.name }}</option>
+        }
+      </select>
+
+      <a routerLink="/appointments/new"
+        class="btn-primary text-sm flex items-center gap-2 no-underline whitespace-nowrap">
+        <i class="i-ph-plus-bold"></i> Nova Agenda
+      </a>
+    </div>
+  </div>
+
+  @if (cats().length === 0) {
+  <div class="card flex flex-col items-center justify-center p-12 text-center border-dashed">
+    <i class="i-ph-cat text-5xl text-cat-textLight mb-3"></i>
+    <p class="text-cat-textLight m-0">Cadastre um gatinho primeiro para adicionar compromissos.</p>
+    <a routerLink="/cats/new" class="btn-primary mt-4 text-sm">Cadastrar Gato</a>
+  </div>
+  } @else if (appointments().length === 0) {
+  <div class="card flex flex-col items-center justify-center p-12 text-center border-dashed">
+    <i class="i-ph-calendar-blank text-5xl text-cat-textLight mb-3"></i>
+    <p class="text-cat-textLight m-0">Nenhum compromisso agendado para este gato.</p>
+  </div>
+  } @else {
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    @for (appt of appointments(); track appt.id) {
+    <div class="card flex flex-col gap-3 relative overflow-hidden group">
+      <div class="absolute top-2 right-2 flex gap-1 z-20">
+        <a [routerLink]="['/appointments/edit', appt.id]"
+          class="w-8 h-8 rounded-lg bg-white/80 backdrop-blur-sm border border-cat-border flex items-center justify-center text-cat-text hover:text-cat-secondary transition-colors shadow-sm">
+          <i class="i-ph-pencil-simple-bold"></i>
+        </a>
+        <button (click)="onDelete(appt)"
+          class="w-8 h-8 rounded-lg bg-white/80 backdrop-blur-sm border border-cat-border flex items-center justify-center text-cat-text hover:text-red-500 transition-colors shadow-sm">
+          <i class="i-ph-trash-bold"></i>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-3 mb-1">
+        <div
+          class="w-12 h-12 rounded-full bg-cat-secondary/20 text-cat-secondary flex items-center justify-center text-2xl shrink-0">
+          <i class="i-ph-calendar-check-fill"></i>
+        </div>
+        <div class="overflow-hidden pr-16">
+          <h3 class="font-heading font-bold text-lg text-cat-text m-0 truncate">{{ appt.type }}</h3>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1.5 mt-2">
+        <div class="flex items-center gap-2 text-sm text-cat-textLight">
+          <i class="i-ph-clock text-cat-secondary/70"></i>
+          <span>{{ appt.dateTime | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+        @if (appt.location) {
+        <div class="flex items-center gap-2 text-sm text-cat-textLight">
+          <i class="i-ph-map-pin text-cat-secondary/70"></i>
+          <span class="truncate">{{ appt.location }}</span>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>

@@ -1,0 +1,21 @@
+<div class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none w-full max-w-xs">
+  @for (toast of toastService.toasts(); track toast.id) {
+  <div
+    class="pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl shadow-sm border bg-white transition-all duration-300"
+    [class.border-cat-secondary]="toast.type === 'success'" [class.border-cat-primary]="toast.type === 'error'"
+    [class.border-cat-warning]="toast.type === 'info'">
+    @if (toast.type === 'success') {
+    <i class="i-ph-check-circle-fill text-2xl text-cat-secondary"></i>
+    } @else if (toast.type === 'error') {
+    <i class="i-ph-warning-fill text-2xl text-cat-primary"></i>
+    } @else {
+    <i class="i-ph-info-fill text-2xl text-cat-warning"></i>
+    }
+
+    <span class="font-medium text-cat-text text-sm flex-1">{{ toast.message }}</span>
+
+    <button class="i-ph-x text-xl text-cat-textLight hover:text-cat-text transition-colors"
+      (click)="toastService.remove(toast.id)"></button>
+  </div>
+  }
+</div>

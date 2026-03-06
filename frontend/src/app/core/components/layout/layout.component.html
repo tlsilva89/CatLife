@@ -1,0 +1,128 @@
+<div class="flex h-screen bg-cat-bg overflow-hidden relative">
+
+  <div
+    class="absolute inset-0 z-0 opacity-10 pointer-events-none bg-[url('/bg-hero.png')] bg-cover bg-center mix-blend-multiply">
+  </div>
+
+  <aside class="hidden md:flex flex-col w-64 bg-white border-r border-cat-border px-4 py-6 z-20 shadow-sm">
+    <div class="flex items-center gap-3 px-2 mb-10 text-cat-primary">
+      <i class="i-ph-paw-print-fill text-3xl"></i>
+      <h1 class="font-heading font-bold text-2xl text-cat-text m-0">CatLife</h1>
+    </div>
+
+    <nav class="flex-1 flex flex-col gap-2">
+      <a routerLink="/" routerLinkActive="bg-cat-primary text-white shadow-sm" [routerLinkActiveOptions]="{exact: true}"
+        class="flex items-center gap-3 px-4 py-3 rounded-xl text-cat-textLight hover:bg-cat-bg transition-colors font-medium">
+        <i class="i-ph-squares-four text-xl"></i>
+        Início
+      </a>
+      <a routerLink="/cats" routerLinkActive="bg-cat-primary text-white shadow-sm"
+        class="flex items-center gap-3 px-4 py-3 rounded-xl text-cat-textLight hover:bg-cat-bg transition-colors font-medium">
+        <i class="i-ph-cat text-xl"></i>
+        Meus Gatos
+      </a>
+      <a routerLink="/health" routerLinkActive="bg-cat-primary text-white shadow-sm"
+        class="flex items-center gap-3 px-4 py-3 rounded-xl text-cat-textLight hover:bg-cat-bg transition-colors font-medium">
+        <i class="i-ph-first-aid-kit text-xl"></i>
+        Saúde
+      </a>
+      <a routerLink="/appointments" routerLinkActive="bg-cat-primary text-white shadow-sm"
+        class="flex items-center gap-3 px-4 py-3 rounded-xl text-cat-textLight hover:bg-cat-bg transition-colors font-medium">
+        <i class="i-ph-calendar-blank text-xl"></i>
+        Agenda
+      </a>
+      <a routerLink="/expenses" routerLinkActive="bg-cat-primary text-white shadow-sm"
+        class="flex items-center gap-3 px-4 py-3 rounded-xl text-cat-textLight hover:bg-cat-bg transition-colors font-medium">
+        <i class="i-ph-currency-dollar text-xl"></i>
+        Financeiro
+      </a>
+      <a routerLink="/ai-vet" routerLinkActive="bg-cat-primary text-white shadow-sm"
+        class="flex items-center gap-3 px-4 py-3 rounded-xl text-cat-textLight hover:bg-cat-bg transition-colors font-medium">
+        <i class="i-ph-robot text-xl"></i>
+        IA Vet
+      </a>
+    </nav>
+
+    <div class="mt-auto border-t border-cat-border pt-4">
+      <div class="flex items-center gap-3 px-2 mb-4">
+        <div
+          class="w-10 h-10 rounded-full bg-cat-secondary flex items-center justify-center text-white font-bold uppercase">
+          {{ authService.currentUser()?.name?.charAt(0) || 'U' }}
+        </div>
+        <div class="flex flex-col overflow-hidden">
+          <span class="text-sm font-bold text-cat-text truncate">{{ authService.currentUser()?.name }}</span>
+          <span class="text-xs text-cat-textLight truncate">{{ authService.currentUser()?.email }}</span>
+        </div>
+      </div>
+      <button (click)="logout()"
+        class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-cat-primary hover:bg-red-50 transition-colors font-medium cursor-pointer">
+        <i class="i-ph-sign-out text-xl"></i>
+        Sair
+      </button>
+    </div>
+  </aside>
+
+  <main class="flex-1 flex flex-col h-screen overflow-y-auto relative z-10">
+
+    <header
+      class="md:hidden flex items-center justify-between bg-white px-4 py-3 border-b border-cat-border sticky top-0 z-30">
+      <div class="flex items-center gap-2 text-cat-primary">
+        <i class="i-ph-paw-print-fill text-2xl"></i>
+        <h1 class="font-heading font-bold text-xl text-cat-text m-0">CatLife</h1>
+      </div>
+      <button (click)="logout()" class="text-cat-textLight hover:text-cat-primary p-2 cursor-pointer">
+        <i class="i-ph-sign-out text-2xl"></i>
+      </button>
+    </header>
+
+    <div class="p-4 md:p-8 flex-1 max-w-7xl mx-auto w-full flex flex-col relative z-10">
+      <div class="flex-1">
+        <router-outlet></router-outlet>
+      </div>
+
+      <footer
+        class="w-full py-6 mt-8 border-t border-cat-border flex items-center justify-center gap-2 text-sm text-cat-textLight pb-24 md:pb-0">
+        <span>Powered by</span>
+        <a href="https://digitalspark.com.br" target="_blank" rel="noopener noreferrer"
+          class="font-bold text-cat-secondary hover:text-cat-primary transition-colors flex items-center gap-1">
+          <i class="i-ph-lightning-fill text-cat-warning"></i>
+          Digital Spark
+        </a>
+      </footer>
+    </div>
+  </main>
+
+  <nav
+    class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-cat-border flex justify-around items-center px-2 py-2 pb-safe z-30 shadow-[0_-4px_10px_rgba(0,0,0,0.03)]">
+    <a routerLink="/" routerLinkActive="text-cat-primary" [routerLinkActiveOptions]="{exact: true}"
+      class="flex flex-col items-center gap-1 p-2 text-cat-textLight">
+      <i class="i-ph-squares-four text-2xl"></i>
+      <span class="text-[10px] font-medium">Início</span>
+    </a>
+    <a routerLink="/cats" routerLinkActive="text-cat-primary"
+      class="flex flex-col items-center gap-1 p-2 text-cat-textLight">
+      <i class="i-ph-cat text-2xl"></i>
+      <span class="text-[10px] font-medium">Gatos</span>
+    </a>
+    <a routerLink="/health" routerLinkActive="text-cat-primary"
+      class="flex flex-col items-center gap-1 p-2 text-cat-textLight">
+      <i class="i-ph-first-aid-kit text-2xl"></i>
+      <span class="text-[10px] font-medium">Saúde</span>
+    </a>
+    <a routerLink="/appointments" routerLinkActive="text-cat-primary"
+      class="flex flex-col items-center gap-1 p-2 text-cat-textLight">
+      <i class="i-ph-calendar-blank text-2xl"></i>
+      <span class="text-[10px] font-medium">Agenda</span>
+    </a>
+    <a routerLink="/expenses" routerLinkActive="text-cat-primary"
+      class="flex flex-col items-center gap-1 p-2 text-cat-textLight">
+      <i class="i-ph-currency-dollar text-2xl"></i>
+      <span class="text-[10px] font-medium">Gastos</span>
+    </a>
+    <a routerLink="/ai-vet" routerLinkActive="text-cat-primary"
+      class="flex flex-col items-center gap-1 p-2 text-cat-textLight">
+      <i class="i-ph-robot text-2xl"></i>
+      <span class="text-[10px] font-medium">IA</span>
+    </a>
+  </nav>
+</div>

@@ -1,0 +1,35 @@
+@if (dialogService.state().isOpen) {
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity" (click)="dialogService.close(false)">
+  </div>
+
+  <div
+    class="card w-full max-w-sm flex flex-col gap-4 relative z-10 animate-in fade-in zoom-in-95 duration-200 shadow-2xl">
+    <div class="flex items-center gap-3 text-red-500">
+      <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-xl">
+        <i class="i-ph-warning-circle-fill"></i>
+      </div>
+      <h3 class="font-heading font-bold text-xl text-cat-text m-0">
+        {{ dialogService.state().title }}
+      </h3>
+    </div>
+
+    <p class="text-cat-textLight text-sm m-0 leading-relaxed">
+      {{ dialogService.state().message }}
+    </p>
+
+    <div class="flex justify-end gap-3 mt-2">
+      <button
+        class="px-4 py-2 rounded-xl border border-cat-border text-cat-text font-semibold hover:bg-cat-bg transition-colors text-sm cursor-pointer"
+        (click)="dialogService.close(false)">
+        {{ dialogService.state().cancelText }}
+      </button>
+      <button
+        class="bg-red-500 text-white px-4 py-2 rounded-xl font-semibold hover:bg-red-600 transition-colors shadow-md text-sm cursor-pointer"
+        (click)="dialogService.close(true)">
+        {{ dialogService.state().confirmText }}
+      </button>
+    </div>
+  </div>
+</div>
+}

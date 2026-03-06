@@ -1,0 +1,50 @@
+<div class="flex flex-col gap-6 max-w-2xl mx-auto w-full">
+  <div class="flex items-center gap-4">
+    <a routerLink="/appointments"
+      class="w-10 h-10 rounded-full bg-white border border-cat-border flex items-center justify-center text-cat-text hover:bg-cat-bg transition-colors cursor-pointer no-underline">
+      <i class="i-ph-arrow-left text-xl"></i>
+    </a>
+    <h2 class="font-heading font-bold text-2xl text-cat-text m-0">
+      {{ isEditMode() ? 'Editar Compromisso' : 'Nova Agenda' }}
+    </h2>
+  </div>
+
+  <div class="card p-6 md:p-8">
+    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+      <div class="flex flex-col gap-1">
+        <label for="catId" class="text-sm font-bold text-cat-text">Gato *</label>
+        <select id="catId" formControlName="catId" class="input-field" [attr.disabled]="isEditMode() ? true : null">
+          @for (cat of cats(); track cat.id) {
+          <option [value]="cat.id">{{ cat.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="type" class="text-sm font-bold text-cat-text">Tipo de Compromisso *</label>
+        <input id="type" type="text" formControlName="type" class="input-field"
+          placeholder="Ex: Vacina V5, Consulta de Rotina">
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="dateTime" class="text-sm font-bold text-cat-text">Data e Hora *</label>
+        <input id="dateTime" type="datetime-local" formControlName="dateTime" class="input-field">
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="location" class="text-sm font-bold text-cat-text">Local</label>
+        <input id="location" type="text" formControlName="location" class="input-field"
+          placeholder="Ex: Clínica Vet Vida">
+      </div>
+
+      <div class="flex justify-end mt-4">
+        <button type="submit" [disabled]="appointmentForm.invalid"
+          class="btn-primary px-8 disabled:opacity-50 disabled:cursor-not-allowed">
+          {{ isEditMode() ? 'Atualizar Agenda' : 'Salvar Agenda' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

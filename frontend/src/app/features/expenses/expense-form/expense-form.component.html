@@ -1,0 +1,52 @@
+<div class="flex flex-col gap-6 max-w-2xl mx-auto w-full">
+  <div class="flex items-center gap-4">
+    <a routerLink="/expenses"
+      class="w-10 h-10 rounded-full bg-white border border-cat-border flex items-center justify-center text-cat-text hover:bg-cat-bg transition-colors cursor-pointer no-underline">
+      <i class="i-ph-arrow-left text-xl"></i>
+    </a>
+    <h2 class="font-heading font-bold text-2xl text-cat-text m-0">
+      {{ isEditMode() ? 'Editar Despesa' : 'Nova Despesa' }}
+    </h2>
+  </div>
+
+  <div class="card p-6 md:p-8">
+    <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+      <div class="flex flex-col gap-1">
+        <label for="catId" class="text-sm font-bold text-cat-text">Gato *</label>
+        <select id="catId" formControlName="catId" class="input-field" [attr.disabled]="isEditMode() ? true : null">
+          @for (cat of cats(); track cat.id) {
+          <option [value]="cat.id">{{ cat.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="category" class="text-sm font-bold text-cat-text">Categoria (Item) *</label>
+        <input id="category" type="text" formControlName="category" class="input-field"
+          placeholder="Ex: Ração, Areia, Brinquedos">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col gap-1">
+          <label for="amount" class="text-sm font-bold text-cat-text">Valor (R$) *</label>
+          <input id="amount" type="number" step="0.01" min="0" formControlName="amount" class="input-field"
+            placeholder="Ex: 50.00">
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="date" class="text-sm font-bold text-cat-text">Data *</label>
+          <input id="date" type="date" formControlName="date" class="input-field">
+        </div>
+      </div>
+
+      <div class="flex justify-end mt-4">
+        <button type="submit" [disabled]="expenseForm.invalid"
+          class="btn-primary px-8 disabled:opacity-50 disabled:cursor-not-allowed">
+          {{ isEditMode() ? 'Atualizar Despesa' : 'Salvar Despesa' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

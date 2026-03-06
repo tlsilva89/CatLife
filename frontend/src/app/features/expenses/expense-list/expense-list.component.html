@@ -1,0 +1,73 @@
+<div class="flex flex-col gap-6">
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <h2 class="font-heading font-bold text-2xl text-cat-text m-0">Financeiro</h2>
+
+    <div class="flex items-center gap-3">
+      <select class="input-field max-w-xs" [ngModel]="selectedCatId()" (change)="onCatChange($event)">
+        @for (cat of cats(); track cat.id) {
+        <option [value]="cat.id">{{ cat.name }}</option>
+        }
+      </select>
+
+      <a routerLink="/expenses/new" class="btn-primary text-sm flex items-center gap-2 no-underline whitespace-nowrap">
+        <i class="i-ph-plus-bold"></i> Nova Despesa
+      </a>
+    </div>
+  </div>
+
+  @if (cats().length === 0) {
+  <div class="card flex flex-col items-center justify-center p-12 text-center border-dashed">
+    <i class="i-ph-cat text-5xl text-cat-textLight mb-3"></i>
+    <p class="text-cat-textLight m-0">Cadastre um gato primeiro para adicionar despesas.</p>
+    <a routerLink="/cats/new" class="btn-primary mt-4 text-sm">Cadastrar Gato</a>
+  </div>
+  } @else if (expenses().length === 0) {
+  <div class="card flex flex-col items-center justify-center p-12 text-center border-dashed">
+    <i class="i-ph-receipt text-5xl text-cat-textLight mb-3"></i>
+    <p class="text-cat-textLight m-0">Nenhuma despesa registrada para este gato.</p>
+  </div>
+  } @else {
+
+  <div class="card bg-cat-primary/10 border-none p-6 mb-2">
+    <p class="text-sm font-bold text-cat-text m-0 mb-1">Total de Gastos</p>
+    <h3 class="font-heading font-bold text-3xl text-cat-primary m-0">{{ totalExpenses() | currency:'BRL' }}</h3>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    @for (expense of expenses(); track expense.id) {
+    <div
+      class="card flex items-center justify-between gap-3 group relative overflow-hidden transition-all hover:border-cat-primary">
+      <div class="flex items-center gap-3 overflow-hidden">
+        <div
+          class="w-12 h-12 rounded-full bg-cat-primary/20 text-cat-primary flex items-center justify-center text-2xl shrink-0">
+          <i class="i-ph-shopping-cart-fill"></i>
+        </div>
+        <div class="overflow-hidden pr-16">
+          <h3 class="font-heading font-bold text-base text-cat-text m-0 truncate">{{ expense.category }}</h3>
+          <div class="flex items-center gap-1 text-xs text-cat-textLight mt-1">
+            <i class="i-ph-calendar-blank"></i>
+            <span>{{ expense.date | date:'dd/MM/yyyy' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-end gap-2 shrink-0">
+        <div class="font-bold text-cat-primary">
+          {{ expense.amount | currency:'BRL' }}
+        </div>
+        <div class="flex gap-1">
+          <a [routerLink]="['/expenses/edit', expense.id]"
+            class="p-1.5 rounded-lg text-cat-textLight hover:text-cat-primary hover:bg-cat-primary/10 transition-all">
+            <i class="i-ph-pencil-simple-bold"></i>
+          </a>
+          <button (click)="onDelete(expense)"
+            class="p-1.5 rounded-lg text-cat-textLight hover:text-red-500 hover:bg-red-50 transition-all">
+            <i class="i-ph-trash-bold"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>

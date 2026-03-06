@@ -1,0 +1,40 @@
+# =========================
+# .NET / C# (Backend)
+# =========================
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+appsettings.*.json
+!appsettings.json
+secrets.json
+
+# =========================
+# Angular / Node (Frontend)
+# =========================
+node_modules/
+dist/
+.angular/
+.npm/
+*.log
+
+# =========================
+# OS / Editor
+# =========================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# =========================
+# Docker / Infra Privada
+# =========================
+# Descomente a linha abaixo se for guardar o docker-compose.yml original com senhas na sua máquina
+# docker-compose.yml
+.env

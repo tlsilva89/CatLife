@@ -1,0 +1,40 @@
+<div class="flex flex-col gap-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h2 class="font-heading font-bold text-2xl text-cat-text m-0">Olá, {{ authService.currentUser()?.name?.split('
+        ')[0] }}! 🐾</h2>
+      <p class="text-cat-textLight text-sm m-0 mt-1">Aqui está o resumo da rotina dos seus gatinhos.</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="card bg-cat-primary/10 border-none flex flex-col items-center justify-center p-6 text-center">
+      <div class="w-12 h-12 rounded-full bg-cat-primary text-white flex items-center justify-center text-2xl mb-3">
+        <i class="i-ph-cat"></i>
+      </div>
+      <h3 class="font-bold text-cat-text m-0">Meus Gatos</h3>
+      <p class="text-xs text-cat-textLight mt-1 mb-4">Gerencie os perfis</p>
+      <a routerLink="/cats" class="btn-primary text-sm px-6 py-1.5 rounded-full inline-block">Ver todos</a>
+    </div>
+
+    <div class="card bg-cat-secondary/10 border-none flex flex-col items-center justify-center p-6 text-center">
+      <div class="w-12 h-12 rounded-full bg-cat-secondary text-white flex items-center justify-center text-2xl mb-3">
+        <i class="i-ph-calendar-plus"></i>
+      </div>
+      <h3 class="font-bold text-cat-text m-0">Agenda</h3>
+      <p class="text-xs text-cat-textLight mt-1 mb-4">Próximas vacinas e consultas</p>
+      <a routerLink="/appointments"
+        class="bg-cat-secondary text-white px-6 py-1.5 rounded-full font-heading font-semibold hover:opacity-90 transition-opacity active:scale-95 text-sm inline-block">Acessar</a>
+    </div>
+
+    <div class="card bg-cat-warning/10 border-none flex flex-col items-center justify-center p-6 text-center">
+      <div class="w-12 h-12 rounded-full bg-cat-warning text-white flex items-center justify-center text-2xl mb-3">
+        <i class="i-ph-robot"></i>
+      </div>
+      <h3 class="font-bold text-cat-text m-0">IA Vet</h3>
+      <p class="text-xs text-cat-textLight mt-1 mb-4">Dúvidas rápidas com a IA</p>
+      <a routerLink="/ai-vet"
+        class="bg-cat-warning text-white px-6 py-1.5 rounded-full font-heading font-semibold hover:opacity-90 transition-opacity active:scale-95 text-sm inline-block">Consultar</a>
+    </div>
+  </div>
+</div>

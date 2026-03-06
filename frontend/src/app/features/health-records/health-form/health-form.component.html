@@ -1,0 +1,50 @@
+<div class="flex flex-col gap-6 max-w-2xl mx-auto w-full">
+  <div class="flex items-center gap-4">
+    <a routerLink="/cats"
+      class="w-10 h-10 rounded-full bg-white border border-cat-border flex items-center justify-center text-cat-text hover:bg-cat-bg transition-colors cursor-pointer no-underline">
+      <i class="i-ph-arrow-left text-xl"></i>
+    </a>
+    <h2 class="font-heading font-bold text-2xl text-cat-text m-0">
+      {{ isEditMode() ? 'Editar Registro' : 'Novo Registro de Saúde' }}
+    </h2>
+  </div>
+
+  <div class="card p-6 md:p-8">
+    <form [formGroup]="healthForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+      <div class="flex flex-col gap-1">
+        <label for="catId" class="text-sm font-bold text-cat-text">Gato *</label>
+        <select id="catId" formControlName="catId" class="input-field" [attr.disabled]="isEditMode() ? true : null">
+          @for (cat of cats(); track cat.id) {
+          <option [value]="cat.id">{{ cat.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="type" class="text-sm font-bold text-cat-text">Tipo (Vacina, Vermífugo, etc.) *</label>
+        <input id="type" type="text" formControlName="type" class="input-field" placeholder="Ex: Vacina V5, Simparic">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col gap-1">
+          <label for="date" class="text-sm font-bold text-cat-text">Data da Aplicação *</label>
+          <input id="date" type="date" formControlName="date" class="input-field">
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="nextDueDate" class="text-sm font-bold text-cat-text">Próxima Dose (Alerta)</label>
+          <input id="nextDueDate" type="date" formControlName="nextDueDate" class="input-field">
+        </div>
+      </div>
+
+      <div class="flex justify-end mt-4">
+        <button type="submit" [disabled]="healthForm.invalid"
+          class="btn-primary px-8 disabled:opacity-50 disabled:cursor-not-allowed">
+          {{ isEditMode() ? 'Atualizar Registro' : 'Salvar Registro' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
